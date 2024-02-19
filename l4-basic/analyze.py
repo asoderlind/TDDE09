@@ -66,16 +66,16 @@ def is_projective(heads):
     return True
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import json
     import sys
 
     n_graphs = 0
 
     statistics = {
-        'total': 0,
-        'gold': {'acyclic': 0, 'connected': 0, 'tree': 0, 'projective': 0},
-        'pred': {'acyclic': 0, 'connected': 0, 'tree': 0, 'projective': 0},
+        "total": 0,
+        "gold": {"acyclic": 0, "connected": 0, "tree": 0, "projective": 0},
+        "pred": {"acyclic": 0, "connected": 0, "tree": 0, "projective": 0},
     }
 
     with open(sys.argv[1]) as fp:
@@ -84,20 +84,20 @@ if __name__ == '__main__':
             gold_graph = heads_to_graph(gold_heads)
             pred_graph = heads_to_graph(pred_heads)
 
-            statistics['total'] += 1
+            statistics["total"] += 1
 
             is_acyclic_gold, is_connected_gold = graph_properties(gold_graph)
-            statistics['gold']['acyclic'] += is_acyclic_gold
-            statistics['gold']['connected'] += is_connected_gold
-            statistics['gold']['tree'] += is_acyclic_gold and is_connected_gold
+            statistics["gold"]["acyclic"] += is_acyclic_gold
+            statistics["gold"]["connected"] += is_connected_gold
+            statistics["gold"]["tree"] += is_acyclic_gold and is_connected_gold
             if is_acyclic_gold and is_connected_gold:
-                statistics['gold']['projective'] += is_projective(gold_heads)
+                statistics["gold"]["projective"] += is_projective(gold_heads)
 
             is_acyclic_pred, is_connected_pred = graph_properties(pred_graph)
-            statistics['pred']['acyclic'] += is_acyclic_pred
-            statistics['pred']['connected'] += is_connected_pred
-            statistics['pred']['tree'] += is_acyclic_pred and is_connected_pred
+            statistics["pred"]["acyclic"] += is_acyclic_pred
+            statistics["pred"]["connected"] += is_connected_pred
+            statistics["pred"]["tree"] += is_acyclic_pred and is_connected_pred
             if is_acyclic_pred and is_connected_pred:
-                statistics['pred']['projective'] += is_projective(pred_heads)
+                statistics["pred"]["projective"] += is_projective(pred_heads)
 
     print(statistics)
